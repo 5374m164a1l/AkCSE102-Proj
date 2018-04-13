@@ -81,7 +81,7 @@ public class Connections extends Application {
         grid.add(out,1,4);
         grid.add(points,1,20);
         
-        grid.setStyle("-fx-background-color: #D8BFD8;");
+        grid.setStyle("-fx-background-color: #E6E6E6;");
 
         Scene scene = new Scene(grid, 300, 300);
         
