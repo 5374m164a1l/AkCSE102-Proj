@@ -2,6 +2,8 @@
  */
 package themadgabfly;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,103 +17,97 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * @author Seth Michail CSE MSc program
+ * @author Seth Michail & Ekin Sert, CSE MSc program
  */
 public class TheMadGabfly extends Application {
     
-    @Override
+   @Override
     public void start(Stage primaryStage) {
         Button btn1 = new Button();
         Button btn2 = new Button();
         Button btn3 = new Button();
         Button btn4 = new Button();
-        Button btn5 = new Button();
-        Button btn6 = new Button();
+        
         btn1.setText("Anagrams");
         btn1.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Code not written yet!!");
+                Anagrams pane1=new Anagrams();
+                try {
+                    pane1.init();
+                    pane1.start(primaryStage);
+                } catch (Exception ex) {
+                    Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
         
-        btn2.setText("Blab Nibs");//maybe "Ad Libs"?
+        btn2.setText("Connections");
         btn2.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Code not written yet!!");
+                Connections pane2=new Connections();
+                try {
+                    pane2.init();
+                    pane2.start(primaryStage);
+                } catch (Exception ex) {
+                    Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
-        });
+        }); 
         
-        btn3.setText("Connections");
+        btn3.setText("Space-o-plex");
         btn3.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Code not written yet!!");
+                Space_o_plex pane3=new Space_o_plex();
+                try {
+                    pane3.init();
+                    pane3.start(primaryStage);
+                } catch (Exception ex) {
+                    Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
   
-        btn4.setText("More Words");
-        btn4.setOnAction((ActionEvent event) -> {
-            System.out.println("Code not written yet!!");
-        });
-        
-        btn5.setText("Settings");
-        btn5.setOnAction(new EventHandler<ActionEvent>() {
+        btn4.setText("Settings");
+        btn4.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Code not written yet!!");
+                Settings pane4=new Settings();
+                try {
+                    pane4.init();
+                    pane4.start(primaryStage);
+                } catch (Exception ex) {
+                    Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
         
-        
-       /* StackPane root = new StackPane();
-        root.getChildren().add(btn1);
-        root.getChildren().add(btn2);
-        root.getChildren().add(btn3);
-        root.getChildren().add(btn4);
-        root.getChildren().add(btn5);
-        
-        Scene scene = new Scene(root, 300, 750);
-        
-        primaryStage.setTitle("Hello Wrld!");
-        primaryStage.setScene(scene);
-        primaryStage.show();*/
-        
         GridPane grid = new GridPane();
-grid.setPadding(new Insets(10, 10, 10, 10));
-grid.setMinSize(300, 300);
-grid.setVgap(5);
-grid.setHgap(5);
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setMinSize(300, 300);
+        grid.setVgap(5);
+        grid.setHgap(5);
  
-//Text username = new Text("Username:");
-grid.add(btn1, 2, 0);
- 
-/*TextField text = new TextField();
-text.setPrefColumnCount(10);
-grid.add(text, 1, 0);
-*/
-grid.add(btn2,2,2);
-grid.add(btn3,2,4);
-grid.add(btn4,2,6);
-grid.add(btn5,2,8);
- 
-/*Text password = new Text("Password:");
-grid.add(password, 0, 1);
- 
-TextField text2 = new TextField();
-text2.setPrefColumnCount(10);
-grid.add(text2, 2, 2);
-*/
-grid.setStyle("-fx-background-color: #D8BFD8;");
-
-Scene scene = new Scene(grid, 300, 650);
+        grid.add(btn1,2,0);
+        grid.add(btn2,2,2);
+        grid.add(btn3,2,4);
+        grid.add(btn4,2,6);
         
-        primaryStage.setTitle("Hello Wrld!");
+        grid.setStyle("-fx-background-color: #D8BFD8;");
+
+        Scene scene = new Scene(grid, 300, 300);
+        
+        primaryStage.setTitle("TheMadGabFly");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
