@@ -114,7 +114,7 @@ public class Anagrams extends Application {//implements ActionListener {
         grid.add(btn2,1,8);
         grid.add(points,1,25);
 
-        grid.setStyle("-fx-background-color: #D8BFD8;");
+        grid.setStyle("-fx-background-color: #E6E6E6;");
         
         Scene scene = new Scene(grid, 615, 315);
         
