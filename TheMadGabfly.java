@@ -103,7 +103,7 @@ public class TheMadGabfly extends Application {
         grid.add(btn3,2,4);
         grid.add(btn4,2,6);
         
-        grid.setStyle("-fx-background-color: #D8BFD8;");
+        grid.setStyle("-fx-background-color: #E6E6E6;");
 
         Scene scene = new Scene(grid, 300, 300);
         
