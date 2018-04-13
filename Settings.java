@@ -159,7 +159,7 @@ public class Settings extends Application {
         grid.add(sbtn2,3,10);
  
         
-        grid.setStyle("-fx-background-color: #D8BFD8;");
+        grid.setStyle("-fx-background-color: #E6E6E6;");
 
         Scene scene = new Scene(grid, 300, 650);
         
