@@ -26,20 +26,16 @@ import themadgabfly.TheMadGabfly;
  * @author Seth Michail & Ekin Sert, CSE MSc program
  */
 
-public class Anagrams extends Application {//implements ActionListener {
-    public static String pword="";
-    public static String cword="";
-    public static Boolean tf=false;
-    public static Text points=new Text("Score: ");
-    public static Text line1=new Text("l1");
-    public static Text line2=new Text("l2");
-    public static TextField in = new TextField("");
-    public static Button btn1 = new Button();
-    public static Button btn2 = new Button();
-    public static Button btn3 = new Button();
-    public static int score = 0;
+public class Anagrams extends Game {//implements ActionListener {
+    public String n = "Anagrams";
     
-    public static ActionListener bl1 = new ActionListener() {
+    @Override
+    public void setTitle(String s) {
+        title.replace("The MadGabFly", n);
+    }
+            
+    
+    public ActionListener bl1 = new ActionListener() {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             if(e.getSource().equals(btn1)){pword=in.getText();}
@@ -48,80 +44,7 @@ public class Anagrams extends Application {//implements ActionListener {
     };
     public static Listener bl2 = new Listener() {};
         
-    @Override
-    public void start(Stage primaryStage) {
-        
-        
-        btn1.setText("Submit");
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                pword=in.getText();
-                line2.setText(pword);
-                in.setText("");
-                tf=game(pword);
-                go(tf);
-                //notifyAll();
-                }
-        });
-        //btn1.addActionListener(bl1);
-        btn2.setText("Start");
-        btn2.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                
-                String word = giveWord();
-                cword=word;
-                wmixr(word);
-            }
-        });
-        btn3.setText("Exit");
-        btn3.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                
-                System.out.println("Code not written yet!!");
-            }
-        });
-        in.setPrefColumnCount(7);
-        in.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                pword=in.getText();
-                line2.setText(pword);
-                
-                in.notifyAll();
-            }
-        });
-        in.setMaxWidth(160);
-        in.setMinWidth(160);
-        
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setMinSize(300, 300);//width,hieght
-        grid.setVgap(5);
-        grid.setHgap(5);
-        //btn1.;
-        grid.add(btn3,0,0);
-        grid.add(line1,1,1);
-        grid.add(line2,1,2);
-        grid.add(in,1,4);
-        grid.add(btn1,1,6);
-        grid.add(btn2,1,8);
-        grid.add(points,1,25);
-
-        grid.setStyle("-fx-background-color: #E6E6E6;");
-        
-        Scene scene = new Scene(grid, 615, 315);
-        
-        primaryStage.setTitle("TheMadGabFly");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+    
     //ans.buildEventDispatchChain(tail);// lookup EventDispatchChain
 //need several methods to replace playAnagrams
 public String wmixr(String s){
@@ -170,4 +93,72 @@ public void go(Boolean trfs){
             
             }}   
 
+//public  int playAnagrams() throws InterruptedException {
+        // //this line doesnt wait
+        /*
+        public static class Waitn extends Thread {
+
+     public Waitn() {} // constructor
+     public void start() {while(something==true){ 
+			//do stuff 
+			wait();
+         } 
+	   } 
+	 }
+
+  //and then later in code somewhere you start the thread.
+  Waitn waiter = new Waitn();
+  waiter.start();
+  //and in your action listener or however you get to you button pressed code, you notify the thread to wakeup.
+
+  public void actionPerformed( ActionEvent ae ) {
+    if( ae.getSource() == myButton ) {
+     waiter.notify();
+
+    }
+
+  }
+
+}
+}
+
+        
+        if(pword.isEmpty()){
+            System.out.println("pword is empty");
+            btn1.getOnMouseClicked();
+            line2.setText(line2.getText()+pword +"line 141");
+            //do{btn1.getOnAction();}while(pword.isEmpty());//
+        //}
+        //while(pword.isEmpty()){
+          //  ans.getOnAction();
+            //wait(200); 
+            }
+        
+        //if(btn1.getOnMouseClicked().toString().equalsIgnoreCase(cword)) {
+            
+        }
+        else {
+            while(pword.compareToIgnoreCase(cword)!=0){
+            score = score - 5;
+            points.setText("Score: "  + 2);
+            line2.setText(line2.getText()+"TRY AGAIN!");
+            //ans.getOnAction();
+            btn1.getOnAction();
+            //ans.notify();
+            //btn1.getOnMouseClicked();
+            System.out.println("Enter the predicted word: ");//only this line gets executed
+            line1.setText("Enter the predicted word: ");
+            Thread.sleep(2000);
+            
+            }
+            //}while(!pword.equalsIgnoreCase(cword));
+            
+        }
+        return score;
+    }
+
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
 }
