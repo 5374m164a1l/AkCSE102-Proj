@@ -1,6 +1,10 @@
 package themadgabfly;
 
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -19,12 +23,13 @@ import static themadgabfly.Dictionary.giveWord;
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
  */
-public class Connections extends Application {
+public class Connections extends Game {//Application {
     public static Boolean bool = false;
     public static int score = 0;
     public static int iou = 0;
     public static String str = "";
     public static String llu = "";
+    public static String c = "Connections";
     public static TextField in = new TextField();
     public static Text comp = new Text(Dictionary.giveWord());
     public static Text out = new Text("");
@@ -35,59 +40,11 @@ public class Connections extends Application {
     public static String[] usedwords = new String[150]; // to keep used words.        
     
     @Override
-    public void start(Stage primaryStage) {
-        
-        btn1.setText("Submit");
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                str = in.getText();
-                out.setText(str);
-                try {
-                    player(str);
-                    computr();
-                    in.setText("");
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
-        });
-        
-        btn3.setText("Exit");
-        btn3.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Code not written yet!!");
-            }
-        });
-        
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setMinSize(300, 300);
-        grid.setVgap(5);
-        grid.setHgap(5);
- 
-        in.setMaxWidth(160);
-        in.setMinWidth(160);
-         
-        grid.add(btn1,1,10);
-        //grid.add(btn2,1,12);
-        grid.add(btn3,0,0);
-        grid.add(in,1,5);
-        grid.add(comp,1,2);
-        grid.add(out,1,4);
-        grid.add(points,1,20);
-        
-        grid.setStyle("-fx-background-color: #E6E6E6;");
-
-        Scene scene = new Scene(grid, 300, 300);
-        
-        primaryStage.setTitle("TheMadGabFly");
-        primaryStage.setScene(scene);
-        primaryStage.show();}
+    public void setTitle(String c){
+        title.replace("The MadGabFly", c);
+    }
+    
+    
 
 public void player(String s) throws InterruptedException {
 
@@ -136,3 +93,71 @@ public void computr(){
         llu = llc;
     }
     }}
+
+    
+    /*
+    louw = usedwords.length; // length of udeswords array.
+      
+        for(int v = 0; v < louw; v++) { // checks if the entry used or not.
+
+        if (player.equals(usedwords[v])) {
+           
+        System.out.println("CPU Wins!");
+        
+        //System.exit(0);
+            
+        }
+        
+        }
+        
+        usedwords[iou] = player;
+        
+        iou++;
+        
+        int a = player.length();
+        
+        String flp = String.valueOf(player.charAt(0)); // first letter of player.
+        
+        String llp = String.valueOf(player.charAt(a-1)); // last letter of player.
+        
+        d = flp.equals(llu);
+        
+        llu = llp; 
+       
+        oe++;
+        
+        }
+       
+        } while(d);
+        
+        System.out.println("CPU Wins!");
+        return score;
+      
+    public static class GraduationYear extends JPanel{
+    private JTextField yearField;
+    private JLabel yearIn,yearOut, graduationField;
+
+    public GraduationYear(){
+        this.setLayout(new GridLayout(2,2));
+        TextListener listener = new TextListener();
+        yearField = new JTextField(6);
+        graduationField = new JLabel("????");
+        JLabel yearIn = new JLabel("Enter college in");
+        JLabel yearOut = new JLabel("Graduation Year");
+        yearField.addActionListener(listener);
+        this.add(yearIn);
+        this.add(yearField);
+        this.add(yearOut);
+        this.add(graduationField);
+    }
+
+  public class TextListener implements ActionListener
+   {
+    public void actionPerformed(java.awt.event.ActionEvent event)
+     {
+        Integer year = new Integer(Integer.parseInt(yearField.getText())+4);
+        //graduationField.setText(yearField.getText()+4);
+        graduationField.setText(year.toString());
+        
+     }
+    */
