@@ -1,8 +1,11 @@
 package themadgabfly;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
+//import java.awt.Font;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,13 +16,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
-import static themadgabfly.TheMadGabfly.main;
+import static themadgabfly.TheMadGabfly.*;
 
 
 /**
- * @author Seth Michail CSE MSc program
+ * @author Seth Michail & Ekin Sert, CSE MSc program
  */
 public class Settings extends Application {
     @Override
@@ -30,10 +33,20 @@ public class Settings extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                
-                //TheMadGabfly.launch(args);
-                //TheMadGabfly.main(args);
-                //exit settings and return to main menu
+                TheMadGabfly again = new TheMadGabfly();
+                try {
+                    again.init();
+                    again.start(primaryStage);
+                    //TheMadGabfly theMadGabfly =
+                    //new TheMadGabfly();
+                    //try using tabbed pane thingy
+                    //need to call no arg constructor for main panel
+                    //TheMadGabfly.launch(args);
+                    //TheMadGabfly.main(args);
+                    //exit settings and return to main menu
+                } catch (Exception ex) {
+                    Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+                }
                }});
         
         RadioButton dbtn1 = new RadioButton("Easy");
@@ -139,24 +152,29 @@ public class Settings extends Application {
         grid.setHgap(5);
         
         
-        grid.add(btn3,1,14);
+        grid.add(btn3,1,24);
+        Text settings = new Text("Settings");
         
+        settings.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.LIGHT, 18));
+        grid.add(settings, 2, 1);
         Text set1 = new Text("Difficulty");
-        grid.add(set1, 1, 4);
-        grid.add(dbtn1,2,4);
-        grid.add(dbtn2,3,4);
+        set1.setFont(Font.font(STYLESHEET_MODENA, FontWeight.LIGHT, 14));
+        
+        grid.add(set1, 1, 8);
+        grid.add(dbtn1,2,8);
+        grid.add(dbtn2,3,8);
         Text set2 = new Text("Timer");
-        grid.add(set2, 1, 6);
-        grid.add(tbtn1,2,6);
-        grid.add(tbtn2,3,6);
+        grid.add(set2, 1, 12);
+        grid.add(tbtn1,2,12);
+        grid.add(tbtn2,3,12);
         Text set3 = new Text("Font Size");
-        grid.add(set3, 1, 8);
-        grid.add(fbtn1,2,8);
-        grid.add(fbtn2,3,8);
+        grid.add(set3, 1, 16);
+        grid.add(fbtn1,2,16);
+        grid.add(fbtn2,3,16);
         Text set4 = new Text("Sound");
-        grid.add(set4,1,10);
-        grid.add(sbtn1,2,10);
-        grid.add(sbtn2,3,10);
+        grid.add(set4,1,20);
+        grid.add(sbtn1,2,20);
+        grid.add(sbtn2,3,20);
  
         
         grid.setStyle("-fx-background-color: #E6E6E6;");
