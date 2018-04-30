@@ -6,11 +6,9 @@ import static themadgabfly.Dictionary.giveWord;
  * @author Seth Michail & Ekin Sert, CSE MSc program
  */
 
-public class Anagrams extends Game {//implements ActionListener {
-    public String n = "Anagrams";
+public class Anagrams extends Game {
     public static int iou = 0;
     public static String[] usedwords = new String[150]; // to keep used words.        
-    
     
     @Override
     public void nextStep(String s){
@@ -34,11 +32,7 @@ public class Anagrams extends Game {//implements ActionListener {
     public void firstStep(){
         //what to when start button is pressed
         wmixr(cword);
-        
-        
     }
-    
-        
     
     public void wmixr(String str){
         int l = str.length();
@@ -81,3 +75,4 @@ public class Anagrams extends Game {//implements ActionListener {
         }
     }
  }
+
