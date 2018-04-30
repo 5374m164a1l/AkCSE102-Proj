@@ -9,13 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import static themadgabfly.Dictionary.*;
+
 
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
@@ -36,6 +35,7 @@ public class TheMadGabfly extends Application {
             public void handle(ActionEvent event) {
                 Anagrams pane1=new Anagrams();
                 try {
+                    pane1.cword = giveWord();
                     pane1.title="Anagrams";
                     pane1.init();
                     pane1.start(primaryStage);
@@ -53,6 +53,7 @@ public class TheMadGabfly extends Application {
             public void handle(ActionEvent event) {
                 Connections pane2=new Connections();
                 try {
+                    pane2.firstStep();
                     pane2.title="Connections";
                     pane2.init();
                     pane2.start(primaryStage);
@@ -70,7 +71,7 @@ public class TheMadGabfly extends Application {
             public void handle(ActionEvent event) {
                 Space_o_plex pane3=new Space_o_plex();
                 try {
-                    pane3.spaceoplex();
+                    pane3.firstStep();
                     pane3.title="Space-o-plex";
                     pane3.init();
                     pane3.start(primaryStage);
@@ -97,14 +98,12 @@ public class TheMadGabfly extends Application {
                 
             }
         });
-        System.out.println(btn1.getLabelPadding());
-        System.out.println(btn1.getLayoutBounds());
-        System.out.println(btn1.getLayoutX());
-        System.out.println(btn1.getHeight());
-        System.out.println(btn1.getOnAction());
+        
+        System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println();
         
-        //btn1.
         
         
         GridPane grid = new GridPane();
@@ -115,7 +114,6 @@ public class TheMadGabfly extends Application {
         grid.setHgap(5);
         
         grid.add(btn1,2,0);
-        System.out.println(grid.getAlignment());
                 
         grid.add(btn2,2,2);
         grid.add(btn3,2,4);
