@@ -3,8 +3,6 @@ package themadgabfly;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import static javafx.application.Application.STYLESHEET_CASPIAN;
-import static javafx.application.Application.STYLESHEET_MODENA;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,7 +13,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
-
+import static javafx.application.Application.STYLESHEET_MODENA;
 
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
@@ -26,7 +24,8 @@ public class Settings extends Application {
         Button mainbtn = new Button();
         mainbtn.setText("Main Menu");
         mainbtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+            //how can we preserve selected settings from previous use of settings panel?
+            //there is still a lot left to do on this one
             @Override
             public void handle(ActionEvent event) {
                 TheMadGabfly again = new TheMadGabfly();
@@ -139,41 +138,36 @@ public class Settings extends Application {
   
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setMinSize(300, 300);
+        grid.setMinSize(280, 300);
         grid.setVgap(5);
         grid.setHgap(5);
-        
-        
-        grid.add(mainbtn,1,24);
-        Text settings = new Text("Settings");
-        
-        settings.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.LIGHT, 18));
-        grid.add(settings, 2, 1);
+        mainbtn.setMaxWidth(250);
+        mainbtn.setMinWidth(250);
+        grid.add(mainbtn, 1, 20, 3, 1);
         Text set1 = new Text("Difficulty");
         set1.setFont(Font.font(STYLESHEET_MODENA, FontWeight.LIGHT, 14));
-        
-        grid.add(set1, 1, 8);
-        grid.add(dbtn1,2,8);
-        grid.add(dbtn2,3,8);
+        grid.add(set1, 1,2);
+        grid.add(dbtn1,2,2);
+        grid.add(dbtn2,3,2);
         Text set2 = new Text("Timer");
-        grid.add(set2, 1, 12);
-        grid.add(tbtn1,2,12);
-        grid.add(tbtn2,3,12);
+        grid.add(set2, 1,6);
+        grid.add(tbtn1,2,6);
+        grid.add(tbtn2,3,6);
         Text set3 = new Text("Font Size");
-        grid.add(set3, 1, 16);
-        grid.add(fbtn1,2,16);
-        grid.add(fbtn2,3,16);
+        grid.add(set3, 1,10);
+        grid.add(fbtn1,2,10);
+        grid.add(fbtn2,3,10);
         Text set4 = new Text("Sound");
-        grid.add(set4,1,20);
-        grid.add(sbtn1,2,20);
-        grid.add(sbtn2,3,20);
+        grid.add(set4,1,14);
+        grid.add(sbtn1,2,14);
+        grid.add(sbtn2,3,14);
  
         
         grid.setStyle("-fx-background-color: #E6E6E6;");
 
-        Scene scene = new Scene(grid, 300, 650);
+        Scene scene = new Scene(grid, 280, 300);
         
-        primaryStage.setTitle("TheMadGabFly");
+        primaryStage.setTitle("Settings");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
