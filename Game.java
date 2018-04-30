@@ -1,5 +1,5 @@
 package themadgabfly;
-// @author username
+
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +15,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javax.xml.bind.Marshaller.Listener;
 
+/**
+ * @author Seth Michail & Ekin Sert, CSE MSc program
+ */
 public abstract class Game extends Application{
     public String title = "The MadGabFly";
     public String pword = "";
@@ -58,7 +61,6 @@ public abstract class Game extends Application{
                     nextStep(pword);
                 }}
         });
-        //btn1.addActionListener(bl1);
         btn2.setText("Start");
         btn2.setOnAction(new EventHandler<ActionEvent>() {
             
@@ -106,7 +108,6 @@ public abstract class Game extends Application{
         grid.setMinSize(300, 300);//width,hieght
         grid.setVgap(5);
         grid.setHgap(5);
-        //btn1.;
         grid.add(btn3,0,0);
         grid.add(message,1,1);
         grid.add(line1,1,2);
@@ -131,5 +132,4 @@ public abstract class Game extends Application{
 
 
 }
-
 
