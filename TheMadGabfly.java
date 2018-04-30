@@ -15,18 +15,25 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import static themadgabfly.Dictionary.*;
 
-
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
  */
 public class TheMadGabfly extends Application {
-    
-   @Override
+    @Override
     public void start(Stage primaryStage) {
         Button btn1 = new Button();
         Button btn2 = new Button();
         Button btn3 = new Button();
         Button btn4 = new Button();
+        
+        btn1.setMaxWidth(100);
+        btn1.setMinWidth(100);
+        btn2.setMaxWidth(100);
+        btn2.setMinWidth(100);
+        btn3.setMaxWidth(100);
+        btn3.setMinWidth(100);
+        btn4.setMaxWidth(100);
+        btn4.setMinWidth(100);
         
         btn1.setText("Anagrams");
         btn1.setOnAction(new EventHandler<ActionEvent>() {
@@ -42,7 +49,6 @@ public class TheMadGabfly extends Application {
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         });
         
@@ -60,7 +66,6 @@ public class TheMadGabfly extends Application {
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         }); 
         
@@ -78,7 +83,6 @@ public class TheMadGabfly extends Application {
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         });
   
@@ -95,7 +99,6 @@ public class TheMadGabfly extends Application {
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         });
         
@@ -103,8 +106,6 @@ public class TheMadGabfly extends Application {
         System.out.println();
         System.out.println();
         System.out.println();
-        
-        
         
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
@@ -114,10 +115,9 @@ public class TheMadGabfly extends Application {
         grid.setHgap(5);
         
         grid.add(btn1,2,0);
-                
         grid.add(btn2,2,2);
         grid.add(btn3,2,4);
-        grid.add(btn4,2,6);
+        grid.add(btn4,2,7);
         
         grid.setStyle("-fx-background-color: #E6E6E6;");
 
