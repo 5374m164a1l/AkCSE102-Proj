@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import static themadgabfly.TMGFTimer.*;
 import javax.xml.bind.Marshaller.Listener;
 
 /**
@@ -21,13 +22,15 @@ import javax.xml.bind.Marshaller.Listener;
  */
 public abstract class Game extends Application{
     public String title = "The MadGabFly";
-    public String pword = "";
-    public String cword = "";
-    public String dword = "";
+    public StringBuilder pword = new StringBuilder();
+    public StringBuilder cword = new StringBuilder();
+    public StringBuilder dword = new StringBuilder();
     public Boolean tf = false;
     public Text message = new Text("Press Start to begin");
     public Text line1 = new Text("");
     public Text line2 = new Text("");
+    public static Text timer = new Text("");
+    public TMGFTimer tr = new TMGFTimer();
     public TextField in = new TextField("");
     public Button btn1 = new Button();
     public Button btn2 = new Button();
@@ -38,7 +41,10 @@ public abstract class Game extends Application{
     public ActionListener bl1 = new ActionListener() {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
-            if(e.getSource().equals(btn1)){pword=in.getText();}
+            if(e.getSource().equals(btn1)){
+                pword.delete(0, pword.length());
+                pword.append( in.getText());
+            }
             throw new UnsupportedOperationException("Not supported yet."); 
         }
     };
@@ -47,17 +53,28 @@ public abstract class Game extends Application{
         
     @Override
     public void start(Stage primaryStage) {
-        
+        if(Settings.tbtn1.isSelected()){
+                    timer.setVisible(false);
+                }else if(Settings.tbtn2.isSelected()) {
+                    
+                    tr.start();
+                    timer.setVisible(true);
+                }
         btn1.setText("Submit");
         btn1.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                pword=in.getText();
+                if(pword.length()==0 ){
+                    pword.append(in.getText());
+                }else{
+                    pword.delete(0, pword.length());
+                    pword.append( in.getText());
+                }
                 if(pword.equals("")){
                     message.setText("Type a word");
                 }else{
-                    line2.setText(pword);
+                    line2.setText(pword.toString());
                     in.setText("");
                     nextStep(pword);
                 }}
@@ -70,6 +87,7 @@ public abstract class Game extends Application{
             public void handle(ActionEvent event) {
                 message.setText("");
                 btn2.setText("Next");
+                
                 firstStep();
             }
         });
@@ -83,9 +101,9 @@ public abstract class Game extends Application{
                 try {
                     again.init();
                     again.start(primaryStage); 
-                    for (int i = 0; i < 149; i++) {
-                        Connections.usedwords[i]=null;
-                    }
+                    Connections.usedWords.clear();
+                    tr.stop();
+                    tr.reset();
                 }catch (Exception ex) {
                     Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -97,10 +115,12 @@ public abstract class Game extends Application{
             
             @Override
             public void handle(ActionEvent event) {
-                pword=in.getText();
-                if(pword.equals("")){line2.setText("Enter a word");
+            pword.delete(0, pword.length());
+            pword.append( in.getText());
+                if(pword.equals("")){
+                    line2.setText("Enter a word");
                 }else{
-                    line2.setText(pword);
+                    line2.setText(pword.toString());
                     in.setText("");
                     nextStep(pword);
                 }
@@ -111,31 +131,33 @@ public abstract class Game extends Application{
         
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setMinSize(300, 300);//width,hieght
+        grid.setMinSize(320, 320);//width,hieght
         grid.setVgap(5);
         grid.setHgap(5);
         grid.add(btn3,0,0);
         message.setFont(new Font(20));
         message.setWrappingWidth(450.0);
-        grid.add(message,1,1);
+        grid.add(message,1,2);
         line1.setFont(new Font(20));
-        grid.add(line1,1,2);
+        grid.add(line1,1,5);
         line2.setFont(new Font(20));
-        grid.add(line2,1,3);
-        grid.add(in,1,5);
-        grid.add(btn1,1,7);
-        grid.add(btn2,1,9);
-        grid.add(points,1,14);
+        grid.add(line2,1,7);
+        grid.add(in,1,9);
+        grid.add(btn1,1,11);
+        grid.add(btn2,1,13);
+        grid.add(points,1,15);
+        timer.setFont(new Font(20));
+        grid.add(timer, 1, 18);
 
         grid.setStyle("-fx-background-color: #E6E6E6;");
         
-        Scene scene = new Scene(grid, 615, 315);
+        Scene scene = new Scene(grid, 615, 335);
         
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public abstract void nextStep(String s);
+    public abstract void nextStep(StringBuilder s);
     public abstract void firstStep();
     
     
