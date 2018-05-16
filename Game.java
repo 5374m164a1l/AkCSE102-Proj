@@ -14,8 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import static themadgabfly.TMGFTimer.*;
 import javax.xml.bind.Marshaller.Listener;
+import static themadgabfly.Settings.fbtn2;
 
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
@@ -87,8 +87,7 @@ public abstract class Game extends Application{
             public void handle(ActionEvent event) {
                 message.setText("");
                 btn2.setText("Next");
-                
-                firstStep();
+                firstStep();        //gets things started
             }
         });
         
@@ -97,13 +96,13 @@ public abstract class Game extends Application{
             
             @Override
             public void handle(ActionEvent event) {
-                TheMadGabfly again = new TheMadGabfly();
+                TheMadGabfly again = new TheMadGabfly();//recreate the main menu
                 try {
                     again.init();
                     again.start(primaryStage); 
                     Connections.usedWords.clear();
-                    tr.stop();
-                    tr.reset();
+                    tr.stop();                  //stop the timer
+                    tr.reset();                 //reset the timer
                 }catch (Exception ex) {
                     Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -112,7 +111,7 @@ public abstract class Game extends Application{
         
         in.setPrefColumnCount(7);
         in.setOnAction(new EventHandler<ActionEvent>() {
-            
+            //when user presses enter key
             @Override
             public void handle(ActionEvent event) {
             pword.delete(0, pword.length());
@@ -131,27 +130,34 @@ public abstract class Game extends Application{
         
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setMinSize(320, 320);//width,hieght
+        grid.setMinSize(320, 350);//width,hieght
         grid.setVgap(5);
         grid.setHgap(5);
         grid.add(btn3,0,0);
-        message.setFont(new Font(20));
+        if(fbtn2.isSelected()){//font set to large
+            message.setFont(new Font(22));
+            line1.setFont(new Font(22));
+            line2.setFont(new Font(22));
+            timer.setFont(new Font(22));
+        }else{              //default small font
+            message.setFont(new Font(16));
+            line1.setFont(new Font(16));
+            line2.setFont(new Font(16));
+            timer.setFont(new Font(16));
+        }
         message.setWrappingWidth(450.0);
         grid.add(message,1,2);
-        line1.setFont(new Font(20));
         grid.add(line1,1,5);
-        line2.setFont(new Font(20));
         grid.add(line2,1,7);
         grid.add(in,1,9);
         grid.add(btn1,1,11);
         grid.add(btn2,1,13);
         grid.add(points,1,15);
-        timer.setFont(new Font(20));
         grid.add(timer, 1, 18);
 
         grid.setStyle("-fx-background-color: #E6E6E6;");
         
-        Scene scene = new Scene(grid, 615, 335);
+        Scene scene = new Scene(grid, 615, 355);
         
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
