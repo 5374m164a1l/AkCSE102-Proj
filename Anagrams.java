@@ -3,8 +3,7 @@ package themadgabfly;
 import java.util.HashSet;
 import static themadgabfly.Dictionary.giveWord;
 import static themadgabfly.Dictionary.populate;
-import static themadgabfly.Settings.dbtn1;
-import static themadgabfly.Settings.loadSaves;
+import static themadgabfly.Settings.dbtn2;
 
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
@@ -40,13 +39,12 @@ public class Anagrams extends Game {
         //what to when start button is pressed
         cword.delete(0, cword.length());
         cword.append(giveWord());
-        System.out.println(cword.toString());
         wmixr(cword.toString());
     }
     
     public void wmixr(String str){
         int l = str.length();
-        if(dbtn1.isSelected() && str.length()>5){//str length <= 5 means no swapping
+        if(dbtn2.isSelected() && str.length()>5){
             String str2 = str.substring(1, str.length()-1);
             int k = str2.length();
             String [] mw = new String[k];
@@ -62,12 +60,9 @@ public class Anagrams extends Game {
                 if(!mw[i].equals(" ")) {
                 dword.append(mw[i]);
                 }
-                
             } while (mw[i].equals(" "));
-            
-        }
-        dword.append(str.substring(str.length()-1, str.length()));
-        System.out.println(dword.toString()+"line 68");
+            }
+            dword.append(str.substring(str.length()-1, str.length()));
         }else{
             String [] mw = new String[l];
             for(int i=0; i<l; i++) {
@@ -82,14 +77,11 @@ public class Anagrams extends Game {
                 }
                 
             } while (mw[i].equals(" "));
-            
-        }System.out.println(dword.toString()+"line 83");
+            }
         }
         message.setText("The mixed word is: ");
         line1.setText(dword.toString());
-        System.out.println(str +" : "+cword + " "+cword.charAt(cword.length()-1));
-        //wordUsed(cword.toString());
-        dword.delete(0, dword.length());
+        dword.delete(0, dword.length());//clears the stringbuilder for reuse
     }
 
     public void wordUsed(String s){
