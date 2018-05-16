@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import static themadgabfly.Dictionary.*;
+import static themadgabfly.Settings.loadSaves;
 
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
@@ -26,14 +27,14 @@ public class TheMadGabfly extends Application {
         Button btn3 = new Button();
         Button btn4 = new Button();
         
-        btn1.setMaxWidth(100);
-        btn1.setMinWidth(100);
-        btn2.setMaxWidth(100);
-        btn2.setMinWidth(100);
-        btn3.setMaxWidth(100);
-        btn3.setMinWidth(100);
-        btn4.setMaxWidth(100);
-        btn4.setMinWidth(100);
+        btn1.setMaxWidth(140);
+        btn1.setMinWidth(140);
+        btn2.setMaxWidth(140);
+        btn2.setMinWidth(140);
+        btn3.setMaxWidth(140);
+        btn3.setMinWidth(140);
+        btn4.setMaxWidth(140);
+        btn4.setMinWidth(140);
         
         btn1.setText("Anagrams");
         btn1.setOnAction(new EventHandler<ActionEvent>() {
@@ -42,10 +43,11 @@ public class TheMadGabfly extends Application {
             public void handle(ActionEvent event) {
                 Anagrams pane1=new Anagrams();
                 try {
-                    pane1.cword = giveWord();
+                    pane1.cword.append(giveWord());
                     pane1.title="Anagrams";
                     pane1.init();
                     pane1.start(primaryStage);
+                    loadSaves();
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -57,12 +59,13 @@ public class TheMadGabfly extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                Connections pane2=new Connections();
+                Connections pane2 = new Connections();
                 try {
                     pane2.firstStep();
                     pane2.title="Connections";
                     pane2.init();
                     pane2.start(primaryStage);
+                    loadSaves();
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -80,6 +83,7 @@ public class TheMadGabfly extends Application {
                     pane3.title="Space-o-plex";
                     pane3.init();
                     pane3.start(primaryStage);
+                    loadSaves();
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -133,6 +137,7 @@ public class TheMadGabfly extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
     }
     
 }
