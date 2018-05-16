@@ -1,6 +1,8 @@
 package themadgabfly;
 
+import java.util.HashSet;
 import static themadgabfly.Dictionary.*;
+import static themadgabfly.Settings.loadSaves;
 
 /**
  * @author Seth Michail & Ekin Sert, CSE MSc program
@@ -9,15 +11,15 @@ public class Connections extends Game {//Application {
     public static Boolean bool = false;
     public static int iou = 0;
     public static String llu = "";
-    public static String[] usedwords = new String[150]; // to keep used words.        
+    public static HashSet usedWords = new HashSet(256);
     
     
     @Override
-    public void nextStep(String s){
+    public void nextStep(StringBuilder s){
         //what to when submit button
-        if(preezent(pword)){
-            if(!used(pword)){
-                chkwrd(pword);
+        if(preezent(pword.toString())){
+            if(!used(pword.toString())){
+                chkwrd(pword.toString());
             }else{
                 message.setText("That word has been used, choose another word");
                 score=score-(cword.length()/2);
@@ -34,95 +36,81 @@ public class Connections extends Game {//Application {
     
     @Override
     public void firstStep(){
-        //what to when start button
+        populate();
+                                //what to when start button
         message.setText("Type a word with first letter same as last letter of word shown below");
-        cword = giveWord(); 
-        if(!used(cword)){
-            for (int i = 0; i < usedwords.length; i++) {
-                if(usedwords[i]==null){
-                    usedwords[i]=cword;
-                    break;}
-            }line1.setText(cword); //the word chosen by the computer
+        if(cword.length()>0){
+            cword.delete(0, cword.length());
+            cword.append(giveWord());
+        }else{
+            cword.append(giveWord());
+        }       
+        if(!used(cword.toString())){
+            usedWords.add(cword.toString());
+            line1.setText(cword.toString());       //the word chosen by the computer
             llu = String.valueOf(cword.charAt(cword.length()-1));
-         //last letter of the computers word
-        }else{firstStep();}
-        btn2.setVisible(false); //hides the start button
+                                        //last letter of the computers word
+        }else{
+            firstStep();                //recursive method call
+        }
+        btn2.setVisible(false);         //hides the start button
     }
     
-    public void computr(){
-        if(cword.isEmpty()){message.setText("Computer word not given!");return;}
-        else{cword = Dictionary.giveWordbyLetter(llu);
-            int louw = usedwords.length; // length of udeswords array.
-            for(int v = 0; v < louw; v++) { // checks if the entry used or not.
-                if (cword.equalsIgnoreCase(usedwords[v])) { 
-                    cword = giveWordbyLetter(llu); // if computer word has already been used, 
-                                         // gives another random word starts with 
-                                         // last letter of user for cword.
-                    v=0;
-                    //what can we do if a suitable word can not be found? need to avoid infinte loop
-                }
-                else if (v==louw-1) {
-                    break;
-                }
+    public void computr(){              //this method gets a word for the computer based on the last letter of the users word
+        int j = 0;
+        if(cword.length()==0){message.setText("Computer word not given!");return;} //sets message and exits method, because something went whack
+        else{
+            while(used(cword.toString())){
+                cword.delete(0, cword.length());
+                cword.append(giveWordbyLetter(llu));
+                j++;
+                if(j>256){System.out.println("error line 66");break;}           //to prevent infinite loop if all valid words have been used
             }
         }
-        
-        int a = cword.length();
-        if(a>0){
+        if(cword.length()>0){
             String flc = String.valueOf(cword.charAt(0));
-            String llc = String.valueOf(cword.charAt(a-1));
-            System.out.println("flc: "+flc+" "+cword+", llc: "+llc+", llu: "+llu);
+            String llc = String.valueOf(cword.charAt(cword.length()-1));
             if(flc.equalsIgnoreCase(llu)){
-                line1.setText(cword);
-                for (int i = 0; i < usedwords.length; i++) {
-                    if(usedwords[i]==null){usedwords[i]=cword;break;}}
+                line1.setText(cword.toString());
+                usedWords.add(cword.toString());
                 llu = llc;
-                System.out.println(llu);
             }
+                
         }
-        for (int i = 0; i < usedwords.length; i++) {
-            System.out.println(usedwords[i]);
-            
-        }
-        
     }
-
+    
     public Boolean used(String s1){
-        boolean val = false;
-        if(usedwords.length>0){
-        for(int v = 0; v < usedwords.length; v++) { // checks if the entry used or not.
-            if (s1.equalsIgnoreCase(usedwords[v])) { 
-                val = true; //if user word has been used
-                break;
+        boolean val = false;            //the default value of false indicates the assumption that the word has not been used
+        
+        if(usedWords.size()>0){
+            if(usedWords.contains(s1)){ // checks if the entry used or not.
+                val = true;             //if user word or computer word has been used
             }
-        }
         }
         return val;
     }
 
     public void chkwrd(String s1){
-        if(usedwords[0]==null){//if no words used yet
+        if(usedWords.isEmpty()){//if no words used yet
             llu=String.valueOf(s1.charAt(s1.length()-1));
             score = score + s1.length();
-            points.setText("Score: " + score); System.out.println("*"+score+"*");
-            for (int i = 0; i < usedwords.length; i++) {
-            if(usedwords[i]==null){usedwords[i]=s1;break;}}
+            message.setText("You can do it!");
+            points.setText("Score: " + score); 
+            usedWords.add(s1);
         }else if(String.valueOf(s1.charAt(0)).equalsIgnoreCase(llu)){//checks if first
                      //letter of player word matches last letter of computer word
             llu=String.valueOf(s1.charAt(s1.length()-1));
             score = score + s1.length();
-            points.setText("Score: " + score); System.out.println("*"+score+"*");
-            for (int i = 0; i < usedwords.length; i++) {
-            if(usedwords[i]==null){usedwords[i]=s1;break;}}
-            
+            message.setText("Keep up the good work!");
+            points.setText("Score: " + score); 
+            usedWords.add(s1);
         }else{
             message.setText("First letter of your word needs to match last letter of word shown");
                 score=score-(cword.length()/2);
                 points.setText("Score: " + score);
                 return;
         }
-        System.out.println(usedwords[usedwords.length-1]);
-            computr();
+        computr();              //to get a new word for the computer
             
     }
 }
