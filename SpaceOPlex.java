@@ -9,7 +9,6 @@ import static themadgabfly.Settings.*;
  * @author Seth Michail & Ekin Sert, CSE MSc program
  */
 public class Space_o_plex extends Game {
-    public static Boolean e = true; //was going to use this for settings changes
     public StringBuilder str = new StringBuilder();
     public static HashSet usedWords = new HashSet(256);
     public static StringBuilder tmp = new StringBuilder();
@@ -73,7 +72,7 @@ public class Space_o_plex extends Game {
         for(int q =0; q < l; q++){
             if(q==r1 || q==r2 || q==r3 || q==r4){
                 str.append(cword.charAt(q));//where to put the clues based on word size
-            }else if(dbtn1.isSelected() && (q==0 || q==l-1)){
+            }else if(dbtn2.isSelected() && (q==0 || q==l-1)){
                 str.append(cword.charAt(q));
             }else{str.append("_ ");
             }//sets the placeholders for the word, including clues
