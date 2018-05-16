@@ -22,6 +22,8 @@ import static themadgabfly.Settings.loadSaves;
 public class TheMadGabfly extends Application {
     @Override
     public void start(Stage primaryStage) {
+        loadSaves();
+        
         Button btn1 = new Button();
         Button btn2 = new Button();
         Button btn3 = new Button();
@@ -47,7 +49,7 @@ public class TheMadGabfly extends Application {
                     pane1.title="Anagrams";
                     pane1.init();
                     pane1.start(primaryStage);
-                    loadSaves();
+                    
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -65,7 +67,6 @@ public class TheMadGabfly extends Application {
                     pane2.title="Connections";
                     pane2.init();
                     pane2.start(primaryStage);
-                    loadSaves();
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -83,7 +84,6 @@ public class TheMadGabfly extends Application {
                     pane3.title="Space-o-plex";
                     pane3.init();
                     pane3.start(primaryStage);
-                    loadSaves();
                 } catch (Exception ex) {
                     Logger.getLogger(TheMadGabfly.class.getName()).log(Level.SEVERE, null, ex);
                 }
